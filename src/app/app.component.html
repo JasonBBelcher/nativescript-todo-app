@@ -1,0 +1,25 @@
+<StackLayout orientation="vertical">
+  <Label class="header" text="NativeScript Todo Demo"></Label>
+  <TextField class="input" #inputvalue  hint="Add a Todo"></TextField>
+  <Button class="button" (tap)="addTodo(inputvalue)" text="Add Todo"></Button>
+  <TextField class="input" #searchvalue (textChange)="filterSearch(searchvalue)" hint="Search for a todo"></TextField>
+  <Button class="button" (tap)="clearTodos()" text="Clear"></Button>
+
+  <ScrollView>
+        <StackLayout height="100%">
+            <ListView  [items]="todos">
+                <ng-template let-item="item" let-i="index" let-odd="odd" let-even="even">
+                    <GridLayout columns="*,*,*,*,*,*" rows="*,*,*,*,*,*,*">
+                        <Label col=0 row=0 colSpan="6" class="todo" [text]="item.text"></Label>
+                        <Label col=0 row=1 colSpan="6" class="priority" [text]="item.priority"></Label>
+
+                        <Button col=1 row=3 colSpan="" class="plus-minus" (tap)="changePriority('+', item)" text="+"></Button>
+                        <Button col=4 row=3 colSpan="1" class="plus-minus" (tap)="changePriority('-', item)" text="-"></Button>
+                        <Button col=0 row=4 colSpan="6" class="button" (tap)="removeTodo(item.id)" text="delete"></Button>
+
+                    </GridLayout>
+                </ng-template>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</StackLayout>
